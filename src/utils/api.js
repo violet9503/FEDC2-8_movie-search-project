@@ -1,15 +1,8 @@
-const API_END_POINT = "https://www.omdbapi.com?apikey=7035c60c";
-
 const request = async (url, options = {}) => {
-  const res = await fetch(`${API_END_POINT}${url}`, {
-    ...options,
-  });
-
-  if (!res.ok) {
-    throw new Error(res.status);
-  }
-
-  return res.json();
+  return await fetch("/.netlify/functions/workspace", {
+    method: "POST",
+    body: JSON.stringify({ url }),
+  }).then(res => res.json());
 };
 
 export const getMovies = async (inputValue, page = 1) => {
