@@ -1,5 +1,5 @@
 <template>
-  <h3 v-if="totalCount">검색 결과 : {{ totalCount }}개</h3>
+  <div class="movie-list-count" v-if="totalCount">검색 결과 : {{ totalCount }}개</div>
   <div class="movie-list-container" ref="movieList">
     <div
       v-for="movie in movieResult"
@@ -11,7 +11,7 @@
         <img :src="movie.Poster" />
       </div>
       <div class="movie-post__info-wrapper">
-        <h4 class="movie-post__info-title">{{ movie.Title }}</h4>
+        <h2 class="movie-post__info-title">{{ movie.Title }}</h2>
         <div>{{ movie.Year }} / {{ movie.Type }}</div>
       </div>
     </div>
@@ -60,7 +60,6 @@ export default {
       entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            console.log("intersecting");
             this.observer.disconnect();
             this.fetchMoreSearch();
           }
@@ -78,6 +77,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 $focusedColor: #7c4dff;
+
+.movie-list-count {
+  font-size: 20px;
+  margin: 30px;
+  font-weight: bold;
+}
 .movie-list-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

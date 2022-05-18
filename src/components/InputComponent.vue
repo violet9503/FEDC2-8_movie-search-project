@@ -36,7 +36,7 @@ export default {
         alert("검색어를 입력해주세요!");
         return;
       }
-      console.log("search : ", this.inputValue);
+
       this.fetchSearch(this.inputValue);
     },
   },
@@ -64,7 +64,9 @@ $focusedColor: #7c4dff;
   background-color: gray;
   color: white;
   border-radius: 0 10px 10px 0;
-  &.isFocused {
+  cursor: pointer;
+  &.isFocused,
+  &:hover {
     background-color: $focusedColor;
   }
 }

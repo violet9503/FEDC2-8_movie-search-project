@@ -1,12 +1,13 @@
 <template>
-  <h3 class="error-message">
+  <div class="error-message">
     <slot></slot>
-  </h3>
+  </div>
 </template>
 <style>
 .error-message {
   text-align: center;
   font-size: 40px;
-  margin-top: 150px;
+  margin-top: 100px;
+  font-weight: bold;
 }
 </style>

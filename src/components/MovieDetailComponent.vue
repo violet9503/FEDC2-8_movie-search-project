@@ -53,7 +53,6 @@ export default {
   created: async function () {
     this.isLoading = true;
     this.movie = await getMovie(this.movieId);
-    console.log(this.movie);
     this.isLoading = false;
   },
 };

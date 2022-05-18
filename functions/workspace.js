@@ -10,8 +10,15 @@ exports.handler = async function (event) {
     method: "GET",
   });
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(res.data),
-  };
+  if (res.statusText !== "OK") {
+    return {
+      statusCode: res.status,
+      body: "API ERROR!",
+    };
+  } else {
+    return {
+      statusCode: 200,
+      body: JSON.stringify(res.data),
+    };
+  }
 };

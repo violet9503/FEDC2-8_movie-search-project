@@ -43,6 +43,7 @@
   border: 1px solid #673ab7;
   font-size: 18px;
   color: #673ab7;
+  margin-top: 15px;
   &:hover {
     border: 1px solid white;
     color: white;

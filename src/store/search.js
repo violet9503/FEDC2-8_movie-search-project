@@ -50,20 +50,22 @@ export default {
   actions: {
     async fetchSearch({ commit }, inputValue) {
       commit("setLoading", true);
+      try {
+        const res = await getMovies(inputValue);
 
-      const res = await getMovies(inputValue);
-      commit("resetState");
+        commit("resetState");
 
-      if (res.Response === "True") {
-        commit("setInputValue", inputValue);
-        commit("setSearchResults", res);
-      } else {
-        commit("setSearchErrorMsg", res.Error);
+        if (res.Response === "True") {
+          commit("setInputValue", inputValue);
+          commit("setSearchResults", res);
+        } else {
+          commit("setSearchErrorMsg", res.Error);
+        }
+      } catch (e) {
+        console.error(e);
       }
 
       commit("setLoading", false);
-
-      console.log(res);
     },
     async fetchMoreSearch({ state, commit }) {
       if (state.totalCount < state.currentPage * 10) {
@@ -71,18 +73,19 @@ export default {
       }
 
       commit("setLoading", true);
+      try {
+        const res = await getMovies(state.inputValue, state.currentPage + 1);
 
-      const res = await getMovies(state.inputValue, state.currentPage + 1);
-
-      if (res.Response === "True") {
-        commit("setSearchResults", res);
-      } else {
-        commit("setSearchErrorMsg", res.Error);
+        if (res.Response === "True") {
+          commit("setSearchResults", res);
+        } else {
+          commit("setSearchErrorMsg", res.Error);
+        }
+      } catch (e) {
+        console.error(e);
       }
 
       commit("setLoading", false);
-
-      console.log(res);
     },
   },
 };

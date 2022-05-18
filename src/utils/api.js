@@ -1,8 +1,15 @@
 const request = async (url, options = {}) => {
-  return await fetch("/.netlify/functions/workspace", {
+  const res = await fetch("/.netlify/functions/workspace", {
     method: "POST",
     body: JSON.stringify({ url }),
-  }).then(res => res.json());
+  });
+
+  if (!res.ok) {
+    console.log("res", res);
+    throw new Error(res);
+  }
+
+  return res.json();
 };
 
 export const getMovies = async (inputValue, page = 1) => {
